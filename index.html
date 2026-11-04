@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magical Garden</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main id="app">
+
+    <!-- Screen 1: Intro -->
+    <section id="screen-intro" class="screen">
+      <h1>Magical Garden</h1>
+      <p>The garden has lost its colour. Help bring it back!</p>
+      <button id="start-btn" class="btn">Start</button>
+    </section>
+
+        <!-- Screen 2: Garden hub -->
+    <section id="screen-garden" class="screen" hidden>
+      <h2>The Garden</h2>
+      <p id="progress-text">0 of 3 garden tasks complete</p>
+
+      <div id="stations">
+        <button id="station-flowerMatch" class="btn station">Flower Match</button>
+        <button id="station-helpBee" class="btn station">Help the Bee</button>
+        <button id="station-butterflyGarden" class="btn station">Butterfly Garden</button>
+      </div>
+    </section>
+
+    <!-- Screen 3: Flower Match (Member 1) -->
+    <section id="screen-flowerMatch" class="screen" hidden>
+      <button class="btn back-btn">Back to garden</button>
+      <h2>Flower Match</h2>
+      <p class="instruction"></p>
+      <div id="flowerMatch-area"></div>
+      <p class="feedback" aria-live="polite"></p>
+    </section>
+
+    <!-- Screen 4: Help the Bee (Member 2) -->
+    <section id="screen-helpBee" class="screen" hidden>
+      <button class="btn back-btn">Back to garden</button>
+      <h2>Help the Bee</h2>
+      <p class="instruction"></p>
+      <div id="helpBee-area"></div>
+      <p class="feedback" aria-live="polite"></p>
+    </section>
+
+    <!-- Screen 5: Butterfly Garden (Member 3) -->
+    <section id="screen-butterflyGarden" class="screen" hidden>
+      <button class="btn back-btn">Back to garden</button>
+      <h2>Butterfly Garden</h2>
+      <p class="instruction"></p>
+      <div id="butterflyGarden-area"></div>
+      <p class="feedback" aria-live="polite"></p>
+    </section>
+
+    <!-- Screen 6: Completion -->
+    <section id="screen-complete" class="screen" hidden>
+      <h2>The garden is full of colour!</h2>
+      <p>You helped bring the garden back to life. Well done!</p>
+      <button id="play-again-btn" class="btn">Play again</button>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
