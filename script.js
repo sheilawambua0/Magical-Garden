@@ -41,3 +41,27 @@ document.querySelectorAll('.back-btn').forEach(function (btn) {
     showScreen('garden');
   });
 });
+
+// ===== Progress and completion (shared by ALL activities) =====
+
+function updateProgressText() {
+  document.getElementById('progress-text').textContent =
+    state.progress + ' of 3 garden tasks complete';
+}
+
+// Every activity calls this ONCE when the child finishes it.
+// id is one of: 'flowerMatch', 'helpBee', 'butterflyGarden'
+function completeActivity(id) {
+  if (state.completedActivities[id]) {
+    return; // already completed, so no double counting
+  }
+  state.completedActivities[id] = true;
+  state.progress = state.progress + 1;
+  updateProgressText();
+
+  if (state.progress === 3) {
+    showScreen('complete');
+  } else {
+    showScreen('garden');
+  }
+}
