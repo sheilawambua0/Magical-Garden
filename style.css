@@ -1,0 +1,135 @@
+/* ===== Design tokens: change colours/fonts here only ===== */
+:root {
+  --bg: #f4f1ea;
+  --surface: #ffffff;
+  --text: #2b2b2b;
+  --primary: #2e7d32;
+  --primary-dark: #1b5e20;
+  --accent: #f9a825;
+  --success-bg: #e3f2e1;
+  --border: #6b7f6b;
+  --radius: 14px;
+  --font: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+}
+
+[hidden] { display: none !important; }
+
+/* ===== Page ===== */
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+
+#app-header {
+  background: var(--primary);
+  color: #ffffff;
+  padding: 12px 20px;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+#app {
+  max-width: 760px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+
+.screen {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+h1, h2, h3 { margin-top: 0; }
+
+/* ===== Shared button style ===== */
+.btn {
+  min-width: 44px;
+  min-height: 48px;
+  padding: 10px 22px;
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ffffff;
+  background: var(--primary);
+  border: 3px solid var(--primary-dark);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.btn:hover { background: var(--primary-dark); }
+
+/* Visible keyboard focus */
+.btn:focus-visible {
+  outline: 4px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.back-btn { margin-bottom: 12px; }
+
+/* ===== Garden hub ===== */
+#stations {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 16px;
+}
+.station { min-width: 180px; min-height: 64px; }
+
+/* ===== Instruction and feedback ===== */
+.instruction { font-size: 1.2rem; }
+.feedback {
+  min-height: 2em;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--primary-dark);
+}
+
+/* ===== Flower Match ===== */
+#flower-cards, #flower-targets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.flower-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 120px;
+  min-height: 110px;
+  color: var(--text);
+  background: #fffdf5;
+  border: 3px solid var(--border);
+}
+.flower-btn:hover { background: #fff3c4; }
+.flower-symbol { font-size: 2.6rem; line-height: 1.2; }
+
+/* Selected: thick dashed border + bigger (not colour alone) */
+.flower-btn.selected {
+  border: 5px dashed var(--primary-dark);
+  background: #fff3c4;
+  transform: scale(1.06);
+}
+
+/* Matched: locked, with the ✓ already in the label */
+.flower-btn.matched:disabled {
+  color: var(--text);
+  background: var(--success-bg);
+  border: 3px solid var(--primary);
+  cursor: default;
+}
+
+/* ===== Small screens ===== */
+@media (max-width: 600px) {
+  .screen { padding: 16px; }
+  .station { width: 100%; }
+}
