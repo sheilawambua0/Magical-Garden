@@ -239,3 +239,142 @@ function resetHelpBee() {
 
 registerActivity('helpBee', startHelpBee);
 registerReset(resetHelpBee);
+
+// =====================================================================
+// ===== MEMBER 4 — Garden visuals (runs LAST, after shared code) ======
+// =====================================================================
+(function () {
+  'use strict';
+
+  // Each activity maps to its region inside the garden scene
+  const GARDEN_MAP = {
+    flowerMatch: ['garden-scene-flowerMatch'],
+    helpBee: ['garden-scene-helpBee'],
+    butterflyGarden: ['garden-scene-butterflyGarden']
+  };
+
+  // Remembers which regions have already popped in, so the pop-in animation
+  // only plays the first time a task is completed (not on every hub visit)
+  const seen = {};
+
+  // ----- Story: everyone is in the garden -> gust of wind -> they run away -> tasks bring them back -----
+  const BACK = {
+    flowerMatch:     'Yay! The flowers are back! Keep going!',
+    helpBee:         'Yay! The bees are back! Keep going!',
+    butterflyGarden: 'Yay! The butterflies are back! Keep going!'
+  };
+  let phase = 'empty';        // 'intro' | 'leaving' | 'empty'
+  let introPlayed = false;    // the run-off plays once per game (and again after Play Again)
+  let lastStory = '';
+  let phaseTimers = [];
+
+  function setPhase(p) {
+    phase = p;
+    const box = document.getElementById('garden-scene');
+    if (box) box.dataset.phase = p;
+  }
+
+  function updateStory() {
+    const el = document.getElementById('garden-story');
+    if (!el) return;
+    let text;
+    if (phase === 'intro')        text = 'The garden friends are playing. Look at them!';
+    else if (phase === 'leaving') text = 'Oh no! A big gust of wind! Your friends are running away!';
+    else if (state.progress === 0) text = 'The garden is empty! Finish the tasks to bring your friends back.';
+    else text = lastStory || (state.progress + ' of 3 groups of friends are back. Keep going!');
+    el.textContent = text;
+  }
+
+  function playIntro() {
+    introPlayed = true;
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (state.progress > 0 || reduce) { setPhase('empty'); return; }   // reduced motion: skip the animation
+    setPhase('intro');
+    phaseTimers.push(setTimeout(function () { setPhase('leaving'); updateStory(); }, 1800));
+    phaseTimers.push(setTimeout(function () { setPhase('empty'); updateStory(); }, 5000));
+  }
+
+  function renderGardenState() {
+    const completed = state.completedActivities;
+    const sceneBox = document.getElementById('garden-scene');
+    if (sceneBox) sceneBox.dataset.progress = state.progress;
+
+    Object.keys(GARDEN_MAP).forEach(function (activityId) {
+      const isDone = !!completed[activityId];
+
+      GARDEN_MAP[activityId].forEach(function (elId) {
+        const el = document.getElementById(elId);
+        if (el) el.classList.toggle('is-colourful', isDone);
+      });
+
+      const region = document.getElementById('garden-scene-' + activityId);
+      if (isDone && !seen[activityId]) lastStory = BACK[activityId];
+      if (region) region.classList.toggle('is-new', isDone && !seen[activityId]);
+      seen[activityId] = isDone;
+
+      const badge = document.querySelector(
+        '.station-status[data-status-for="' + activityId + '"]'
+      );
+      if (badge) {
+        badge.textContent = isDone ? '✓ Complete' : 'Not started';
+        badge.classList.toggle('is-complete', isDone);
+      }
+    });
+  }
+
+  function renderGarden() {
+    renderGardenState();
+    const hub = document.getElementById('screen-garden');
+    if (hub && !hub.hidden && !introPlayed) playIntro();   // only when the hub is really on screen
+    updateStory();
+  }
+
+  function resetGardenVisuals() {
+    phaseTimers.forEach(clearTimeout);
+    phaseTimers = [];
+    introPlayed = false;
+    lastStory = '';
+    setPhase('empty');
+    updateStory();
+    const sceneBox = document.getElementById('garden-scene');
+    if (sceneBox) sceneBox.dataset.progress = 0;
+    Object.keys(GARDEN_MAP).forEach(function (activityId) {
+      seen[activityId] = false;
+      const region = document.getElementById('garden-scene-' + activityId);
+      if (region) region.classList.remove('is-new');
+      GARDEN_MAP[activityId].forEach(function (elId) {
+        const el = document.getElementById(elId);
+        if (el) el.classList.remove('is-colourful');
+      });
+
+      const badge = document.querySelector(
+        '.station-status[data-status-for="' + activityId + '"]'
+      );
+      if (badge) {
+        badge.textContent = 'Not started';
+        badge.classList.remove('is-complete');
+      }
+    });
+  }
+
+  // Re-render whenever the garden hub becomes visible.
+  // Uses MutationObserver so we don't have to touch M1's showScreen().
+  const gardenScreen = document.getElementById('screen-garden');
+  if (gardenScreen && typeof MutationObserver !== 'undefined') {
+    const observer = new MutationObserver(function () {
+      if (!gardenScreen.hidden) renderGarden();
+    });
+    observer.observe(gardenScreen, {
+      attributes: true,
+      attributeFilter: ['hidden']
+    });
+  }
+
+  // Render once on load so the hub starts correct
+  renderGarden();
+
+  // Register reset via shared function (now defined, since we're at the bottom)
+  registerReset(resetGardenVisuals);
+
+  window.renderGarden = renderGarden; // debugging aid
+})();

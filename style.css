@@ -1,3 +1,123 @@
+/* ============================================================
+   MEMBER 4 — Garden visual only (no page background, no panels, no cards)
+   ============================================================ */
+[hidden] { display: none !important; }
+
+#garden-scene,
+#celebration-scene { width: 100%; max-width: 720px; margin: 0.5rem auto; }
+
+.garden-stage {
+  position: relative;
+  aspect-ratio: 800 / 560;
+  overflow: hidden;
+  border-radius: 16px;
+  container-type: inline-size;        /* lets the run-off be sized in "cqw" units */
+}
+.garden-stage > .garden-backdrop { width: 100%; height: 100%; display: block; }
+.garden-region { position: absolute; inset: 0; pointer-events: none; }
+.garden-item { position: absolute; display: block; opacity: 0; transform-origin: 50% 100%; }
+.garden-item img { display: block; width: 100%; height: auto; }
+.garden-item .drift { display: block; }
+
+/* Colour returns to the garden step by step (visible system status) */
+.garden-backdrop { transition: filter 0.8s ease; }
+#garden-scene[data-progress="0"] .garden-backdrop { filter: saturate(0.5) brightness(1.04); }
+#garden-scene[data-progress="1"] .garden-backdrop { filter: saturate(0.7) brightness(1.03); }
+#garden-scene[data-progress="2"] .garden-backdrop { filter: saturate(0.85); }
+
+/* Flowers, bees and butterflies stay hidden until their task is complete */
+.garden-region.is-colourful .garden-item { opacity: 1; }
+
+/* Pop in the first time they appear (is-new), one after another */
+.garden-region.is-new .garden-item {
+  animation: gardenPop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-delay: calc(var(--d) * 40ms);
+}
+@keyframes gardenPop {
+  0%   { opacity: 0; transform: translateY(8px) scale(0.3); }
+  100% { opacity: 1; transform: none; }
+}
+
+/* Bees and butterflies drift gently once they are in the garden */
+.garden-region.is-colourful .drift { animation: gardenDrift 4s ease-in-out infinite alternate; }
+@keyframes gardenDrift {
+  from { transform: translate(-4px, 3px); }
+  to   { transform: translate(5px, -5px); }
+}
+
+/* ---- Story: everyone is here (intro) -> gust of wind (leaving) -> garden is empty ---- */
+#garden-scene[data-phase="intro"] .garden-item,
+#garden-scene[data-phase="leaving"] .garden-item { opacity: 1; }
+#garden-scene[data-phase="intro"] .garden-backdrop { filter: none; }
+#garden-scene[data-phase="leaving"] .garden-backdrop {
+  filter: saturate(0.5) brightness(1.04);
+  transition: filter 1.6s ease 0.5s;
+}
+#garden-scene[data-phase="intro"] .drift { animation: gardenDrift 4s ease-in-out infinite alternate; }
+
+/* Flowers tuck into the ground; bees and butterflies fly off the edges */
+#garden-scene[data-phase="leaving"] .garden-item {
+  animation: gardenTuck 0.7s ease-in both;
+  animation-delay: calc(0.4s + var(--d) * 22ms);
+}
+#garden-scene[data-phase="leaving"] .garden-item.fly {
+  animation: gardenRunOff 1.8s ease-in both;
+  animation-delay: calc(0.3s + var(--d) * 40ms);
+}
+@keyframes gardenTuck {
+  0%   { opacity: 1; transform: none; }
+  30%  { transform: translateY(-6px) scale(1.1); }
+  100% { opacity: 0; transform: translateY(18px) scale(0.1); }
+}
+@keyframes gardenRunOff {
+  0%   { opacity: 1; transform: none; }
+  15%  { transform: translateY(-10px) scale(1.1); }
+  100% { opacity: 0; transform: translate(calc(var(--dx, -90) * 1cqw), calc(var(--dy, -10) * 1cqw)) scale(0.6); }
+}
+
+/* Gust of wind: a few white streaks sweeping across */
+.gust { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.gust i {
+  position: absolute; left: -40%; width: 35%; height: 5px;
+  border-radius: 5px; background: rgba(255, 255, 255, 0.9); opacity: 0;
+}
+#garden-scene[data-phase="leaving"] .gust i {
+  animation: gardenGustBar 1.5s ease-in-out both;
+  animation-delay: calc(var(--g) * 120ms);
+}
+@keyframes gardenGustBar {
+  0%   { opacity: 0; transform: translateX(0); }
+  20%  { opacity: 0.9; }
+  100% { opacity: 0; transform: translateX(450%); }
+}
+
+/* Story line under the progress text */
+.garden-story {
+  min-height: 1.6em;
+  margin: 0.25rem 0 0.5rem;
+  text-align: center;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #397545;
+}
+
+/* Hub buttons in a row */
+#stations { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1rem; }
+
+/* Completion: Play again fades in after the garden has filled up */
+#screen-complete { text-align: center; }
+#screen-complete #play-again-btn { animation: gardenFade 0.6s ease 1.4s both; }
+@keyframes gardenFade {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Reduced motion: no animation, everything just appears */
+@media (prefers-reduced-motion: reduce) {
+  .garden-backdrop { transition: none; }
+  .garden-item, .garden-region .garden-item, .drift, .gust i,
+  #screen-complete #play-again-btn { animation: none !important; transition: none !important; }
+}
 
 /* ===== Help the Bee (Member 2) ===== */
 /* var(--x, fallback) so this works before/after the shared tokens are merged */
@@ -53,4 +173,26 @@
 
 @media (max-width: 600px) {
   .bee-plant { width: 100%; }
+}
+
+/* ===== Station status badges (feed the .station-status lookups in JS) ===== */
+.station-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+.station-status {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6b7f6b;
+  padding: 2px 10px;
+  border: 2px solid #6b7f6b;
+  border-radius: 999px;
+  background: #fffdf5;
+}
+.station-status.is-complete {
+  color: #2e7d32;
+  border-color: #2e7d32;
+  background: #e3f2e1;
 }
