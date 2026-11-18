@@ -7,12 +7,14 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <header id="app-header">
+    <span class="brand">🌼 Magical Garden</span>
+  </header>
 
   <main id="app">
-
     <!-- Screen 1: Intro -->
     <section id="screen-intro" class="screen">
-      <h1>Magical Garden</h1>
+      <h1>Welcome!</h1>
       <p>The garden has lost its colour. Help bring it back!</p>
       <button id="start-btn" class="btn">Start</button>
     </section>
@@ -21,72 +23,79 @@
     <section id="screen-garden" class="screen" hidden>
       <h2>The Garden</h2>
       <p id="progress-text">0 of 3 garden tasks complete</p>
+      
+      <!-- MEMBER 4: The Garden Story & Visuals -->
       <p id="garden-story" class="garden-story" role="status" aria-live="polite"></p>
-
-      <!-- Garden visual (Member 4): flowers, bees and butterflies appear as tasks finish -->
       <div id="garden-scene" aria-hidden="true" data-progress="0" data-phase="empty">
-<div class="garden-stage">
-  <img class="garden-backdrop" src="backdrop.jpg" alt="">
-  <div id="garden-scene-flowerMatch" class="garden-region">
-        <span class="garden-item" style="left:48.91%;top:64.70%;width:2.18%;--d:0"><img src="flower-1.png" alt=""></span>
-        <span class="garden-item" style="left:50.52%;top:64.85%;width:2.21%;--d:1"><img src="flower-2.png" alt=""></span>
-        <span class="garden-item" style="left:43.86%;top:65.51%;width:2.28%;--d:2"><img src="flower-3.png" alt=""></span>
-        <span class="garden-item" style="left:54.84%;top:65.85%;width:2.32%;--d:3"><img src="flower-4.png" alt=""></span>
-        <span class="garden-item" style="left:40.22%;top:65.85%;width:2.32%;--d:4"><img src="flower-5.png" alt=""></span>
-        <span class="garden-item" style="left:46.70%;top:66.00%;width:2.35%;--d:5"><img src="flower-6.png" alt=""></span>
-        <span class="garden-item" style="left:49.75%;top:67.33%;width:2.49%;--d:6"><img src="flower-1.png" alt=""></span>
-        <span class="garden-item" style="left:52.72%;top:67.81%;width:2.56%;--d:7"><img src="flower-2.png" alt=""></span>
-        <span class="garden-item" style="left:37.47%;top:70.14%;width:2.81%;--d:8"><img src="flower-3.png" alt=""></span>
-        <span class="garden-item" style="left:47.47%;top:70.14%;width:2.81%;--d:9"><img src="flower-4.png" alt=""></span>
-        <span class="garden-item" style="left:19.80%;top:77.57%;width:3.65%;--d:10"><img src="flower-5.png" alt=""></span>
-        <span class="garden-item" style="left:77.12%;top:78.39%;width:3.76%;--d:11"><img src="flower-6.png" alt=""></span>
-        <span class="garden-item" style="left:74.59%;top:79.23%;width:3.83%;--d:12"><img src="flower-1.png" alt=""></span>
-        <span class="garden-item" style="left:76.89%;top:80.38%;width:3.97%;--d:13"><img src="flower-2.png" alt=""></span>
-        <span class="garden-item" style="left:17.62%;top:80.89%;width:4.00%;--d:14"><img src="flower-3.png" alt=""></span>
-        <span class="garden-item" style="left:91.48%;top:81.22%;width:4.04%;--d:15"><img src="flower-4.png" alt=""></span>
-        <span class="garden-item" style="left:84.89%;top:82.53%;width:4.21%;--d:16"><img src="flower-5.png" alt=""></span>
-        <span class="garden-item" style="left:69.25%;top:82.86%;width:4.25%;--d:17"><img src="flower-6.png" alt=""></span>
-        <span class="garden-item" style="left:69.86%;top:83.01%;width:4.28%;--d:18"><img src="flower-1.png" alt=""></span>
-        <span class="garden-item" style="left:4.43%;top:84.19%;width:4.39%;--d:19"><img src="flower-2.png" alt=""></span>
-        <span class="garden-item" style="left:31.43%;top:84.19%;width:4.39%;--d:20"><img src="flower-3.png" alt=""></span>
-        <span class="garden-item" style="left:37.16%;top:84.52%;width:4.42%;--d:21"><img src="flower-4.png" alt=""></span>
-        <span class="garden-item" style="left:8.16%;top:84.52%;width:4.42%;--d:22"><img src="flower-5.png" alt=""></span>
-        <span class="garden-item" style="left:25.90%;top:84.67%;width:4.46%;--d:23"><img src="flower-6.png" alt=""></span>
-        <span class="garden-item" style="left:14.65%;top:84.67%;width:4.46%;--d:24"><img src="flower-1.png" alt=""></span>
-        <span class="garden-item" style="left:66.09%;top:85.49%;width:4.56%;--d:25"><img src="flower-2.png" alt=""></span>
-        <span class="garden-item" style="left:4.09%;top:85.67%;width:4.56%;--d:26"><img src="flower-3.png" alt=""></span>
-        <span class="garden-item" style="left:77.22%;top:85.85%;width:4.56%;--d:27"><img src="flower-4.png" alt=""></span>
-        <span class="garden-item" style="left:22.45%;top:86.00%;width:4.60%;--d:28"><img src="flower-5.png" alt=""></span>
-        <span class="garden-item" style="left:80.56%;top:86.15%;width:4.63%;--d:29"><img src="flower-6.png" alt=""></span>
-        <span class="garden-item" style="left:30.67%;top:86.49%;width:4.67%;--d:30"><img src="flower-1.png" alt=""></span>
-        <span class="garden-item" style="left:15.29%;top:86.67%;width:4.67%;--d:31"><img src="flower-2.png" alt=""></span>
-        <span class="garden-item" style="left:82.38%;top:87.15%;width:4.74%;--d:32"><img src="flower-3.png" alt=""></span>
-        <span class="garden-item" style="left:28.88%;top:87.33%;width:4.74%;--d:33"><img src="flower-4.png" alt=""></span>
-        <span class="garden-item" style="left:81.49%;top:87.48%;width:4.77%;--d:34"><img src="flower-5.png" alt=""></span>
-        <span class="garden-item" style="left:9.69%;top:88.66%;width:4.88%;--d:35"><img src="flower-6.png" alt=""></span>
-        <span class="garden-item" style="left:71.90%;top:89.14%;width:4.95%;--d:36"><img src="flower-1.png" alt=""></span>
-        <span class="garden-item" style="left:78.96%;top:90.47%;width:5.09%;--d:37"><img src="flower-2.png" alt=""></span>
-  </div>
-  <div id="garden-scene-helpBee" class="garden-region">
-        <span class="garden-item fly" style="left:32.96%;top:48.87%;width:6.58%;--d:0;--dx:-56.2;--dy:-7.5"><span class="drift"><img src="bee.png" alt=""></span></span>
-        <span class="garden-item fly" style="left:62.15%;top:42.71%;width:5.70%;--d:3;--dx:55.0;--dy:-10.6"><span class="drift"><img src="bee.png" alt=""></span></span>
-        <span class="garden-item fly" style="left:23.15%;top:69.67%;width:7.46%;--d:6;--dx:-46.9;--dy:-13.8"><span class="drift"><img src="bee.png" alt=""></span></span>
-        <span class="garden-item fly" style="left:55.68%;top:59.90%;width:6.14%;--d:9;--dx:61.2;--dy:-16.9"><span class="drift"><img src="bee.png" alt=""></span></span>
-        <span class="garden-item fly" style="left:82.96%;top:63.16%;width:6.58%;--d:12;--dx:33.8;--dy:-20.0"><span class="drift"><img src="bee.png" alt=""></span></span>
-  </div>
-  <div id="garden-scene-butterflyGarden" class="garden-region">
-        <span class="garden-item fly" style="left:37.96%;top:22.08%;width:6.58%;--d:0;--dx:-61.2;--dy:-7.5"><span class="drift"><img src="butterfly.png" alt=""></span></span>
-        <span class="garden-item fly" style="left:53.62%;top:17.67%;width:5.26%;--d:3;--dx:63.8;--dy:-10.6"><span class="drift"><img src="butterfly.png" alt=""></span></span>
-        <span class="garden-item fly" style="left:66.49%;top:32.49%;width:7.02%;--d:6;--dx:50.0;--dy:-13.8"><span class="drift"><img src="butterfly.png" alt=""></span></span>
-        <span class="garden-item fly" style="left:34.65%;top:42.35%;width:5.70%;--d:9;--dx:-57.5;--dy:-16.9"><span class="drift"><img src="butterfly.png" alt=""></span></span>
-        <span class="garden-item fly" style="left:9.43%;top:49.18%;width:6.14%;--d:12;--dx:-32.5;--dy:-20.0"><span class="drift"><img src="butterfly.png" alt=""></span></span>
-        <span class="garden-item fly" style="left:57.59%;top:50.12%;width:4.83%;--d:15;--dx:60.0;--dy:-23.1"><span class="drift"><img src="butterfly.png" alt=""></span></span>
-  </div>
- 
-  <div class="gust"><i style="--g:0;top:27%"></i><i style="--g:1;top:42%"></i><i style="--g:2;top:57%"></i><i style="--g:3;top:71%"></i></div>
-</div>
+        <div class="garden-stage">
+          <img class="garden-backdrop" src="backdrop.jpg" alt="">
+          
+          <!-- Flowers Region -->
+          <div id="garden-scene-flowerMatch" class="garden-region">
+            <span class="garden-item" style="left:48.91%;top:64.70%;width:2.18%;--d:0"><img src="flower-1.png" alt=""></span>
+            <span class="garden-item" style="left:50.52%;top:64.85%;width:2.21%;--d:1"><img src="flower-2.png" alt=""></span>
+            <span class="garden-item" style="left:43.86%;top:65.51%;width:2.28%;--d:2"><img src="flower-3.png" alt=""></span>
+            <span class="garden-item" style="left:54.84%;top:65.85%;width:2.32%;--d:3"><img src="flower-4.png" alt=""></span>
+            <span class="garden-item" style="left:40.22%;top:65.85%;width:2.32%;--d:4"><img src="flower-5.png" alt=""></span>
+            <span class="garden-item" style="left:46.70%;top:66.00%;width:2.35%;--d:5"><img src="flower-6.png" alt=""></span>
+            <span class="garden-item" style="left:49.75%;top:67.33%;width:2.49%;--d:6"><img src="flower-1.png" alt=""></span>
+            <span class="garden-item" style="left:52.72%;top:67.81%;width:2.56%;--d:7"><img src="flower-2.png" alt=""></span>
+            <span class="garden-item" style="left:37.47%;top:70.14%;width:2.81%;--d:8"><img src="flower-3.png" alt=""></span>
+            <span class="garden-item" style="left:47.47%;top:70.14%;width:2.81%;--d:9"><img src="flower-4.png" alt=""></span>
+            <span class="garden-item" style="left:19.80%;top:77.57%;width:3.65%;--d:10"><img src="flower-5.png" alt=""></span>
+            <span class="garden-item" style="left:77.12%;top:78.39%;width:3.76%;--d:11"><img src="flower-6.png" alt=""></span>
+            <span class="garden-item" style="left:74.59%;top:79.23%;width:3.83%;--d:12"><img src="flower-1.png" alt=""></span>
+            <span class="garden-item" style="left:76.89%;top:80.38%;width:3.97%;--d:13"><img src="flower-2.png" alt=""></span>
+            <span class="garden-item" style="left:17.62%;top:80.89%;width:4.00%;--d:14"><img src="flower-3.png" alt=""></span>
+            <span class="garden-item" style="left:91.48%;top:81.22%;width:4.04%;--d:15"><img src="flower-4.png" alt=""></span>
+            <span class="garden-item" style="left:84.89%;top:82.53%;width:4.21%;--d:16"><img src="flower-5.png" alt=""></span>
+            <span class="garden-item" style="left:69.25%;top:82.86%;width:4.25%;--d:17"><img src="flower-6.png" alt=""></span>
+            <span class="garden-item" style="left:69.86%;top:83.01%;width:4.28%;--d:18"><img src="flower-1.png" alt=""></span>
+            <span class="garden-item" style="left:4.43%;top:84.19%;width:4.39%;--d:19"><img src="flower-2.png" alt=""></span>
+            <span class="garden-item" style="left:31.43%;top:84.19%;width:4.39%;--d:20"><img src="flower-3.png" alt=""></span>
+            <span class="garden-item" style="left:37.16%;top:84.52%;width:4.42%;--d:21"><img src="flower-4.png" alt=""></span>
+            <span class="garden-item" style="left:8.16%;top:84.52%;width:4.42%;--d:22"><img src="flower-5.png" alt=""></span>
+            <span class="garden-item" style="left:25.90%;top:84.67%;width:4.46%;--d:23"><img src="flower-6.png" alt=""></span>
+            <span class="garden-item" style="left:14.65%;top:84.67%;width:4.46%;--d:24"><img src="flower-1.png" alt=""></span>
+            <span class="garden-item" style="left:66.09%;top:85.49%;width:4.56%;--d:25"><img src="flower-2.png" alt=""></span>
+            <span class="garden-item" style="left:4.09%;top:85.67%;width:4.56%;--d:26"><img src="flower-3.png" alt=""></span>
+            <span class="garden-item" style="left:77.22%;top:85.85%;width:4.56%;--d:27"><img src="flower-4.png" alt=""></span>
+            <span class="garden-item" style="left:22.45%;top:86.00%;width:4.60%;--d:28"><img src="flower-5.png" alt=""></span>
+            <span class="garden-item" style="left:80.56%;top:86.15%;width:4.63%;--d:29"><img src="flower-6.png" alt=""></span>
+            <span class="garden-item" style="left:30.67%;top:86.49%;width:4.67%;--d:30"><img src="flower-1.png" alt=""></span>
+            <span class="garden-item" style="left:15.29%;top:86.67%;width:4.67%;--d:31"><img src="flower-2.png" alt=""></span>
+            <span class="garden-item" style="left:82.38%;top:87.15%;width:4.74%;--d:32"><img src="flower-3.png" alt=""></span>
+            <span class="garden-item" style="left:28.88%;top:87.33%;width:4.74%;--d:33"><img src="flower-4.png" alt=""></span>
+            <span class="garden-item" style="left:81.49%;top:87.48%;width:4.77%;--d:34"><img src="flower-5.png" alt=""></span>
+            <span class="garden-item" style="left:9.69%;top:88.66%;width:4.88%;--d:35"><img src="flower-6.png" alt=""></span>
+            <span class="garden-item" style="left:71.90%;top:89.14%;width:4.95%;--d:36"><img src="flower-1.png" alt=""></span>
+            <span class="garden-item" style="left:78.96%;top:90.47%;width:5.09%;--d:37"><img src="flower-2.png" alt=""></span>
+          </div>
+
+          <!-- Bees Region -->
+          <div id="garden-scene-helpBee" class="garden-region">
+            <span class="garden-item fly" style="left:32.96%;top:48.87%;width:6.58%;--d:0;--dx:-56.2;--dy:-7.5"><span class="drift"><img src="bee.png" alt=""></span></span>
+            <span class="garden-item fly" style="left:62.15%;top:42.71%;width:5.70%;--d:3;--dx:55.0;--dy:-10.6"><span class="drift"><img src="bee.png" alt=""></span></span>
+            <span class="garden-item fly" style="left:23.15%;top:69.67%;width:7.46%;--d:6;--dx:-46.9;--dy:-13.8"><span class="drift"><img src="bee.png" alt=""></span></span>
+            <span class="garden-item fly" style="left:55.68%;top:59.90%;width:6.14%;--d:9;--dx:61.2;--dy:-16.9"><span class="drift"><img src="bee.png" alt=""></span></span>
+            <span class="garden-item fly" style="left:82.96%;top:63.16%;width:6.58%;--d:12;--dx:33.8;--dy:-20.0"><span class="drift"><img src="bee.png" alt=""></span></span>
+          </div>
+
+          <!-- Butterflies Region -->
+          <div id="garden-scene-butterflyGarden" class="garden-region">
+            <span class="garden-item fly" style="left:37.96%;top:22.08%;width:6.58%;--d:0;--dx:-61.2;--dy:-7.5"><span class="drift"><img src="butterfly.png" alt=""></span></span>
+            <span class="garden-item fly" style="left:53.62%;top:17.67%;width:5.26%;--d:3;--dx:63.8;--dy:-10.6"><span class="drift"><img src="butterfly.png" alt=""></span></span>
+            <span class="garden-item fly" style="left:66.49%;top:32.49%;width:7.02%;--d:6;--dx:50.0;--dy:-13.8"><span class="drift"><img src="butterfly.png" alt=""></span></span>
+            <span class="garden-item fly" style="left:34.65%;top:42.35%;width:5.70%;--d:9;--dx:-57.5;--dy:-16.9"><span class="drift"><img src="butterfly.png" alt=""></span></span>
+            <span class="garden-item fly" style="left:9.43%;top:49.18%;width:6.14%;--d:12;--dx:-32.5;--dy:-20.0"><span class="drift"><img src="butterfly.png" alt=""></span></span>
+            <span class="garden-item fly" style="left:57.59%;top:50.12%;width:4.83%;--d:15;--dx:60.0;--dy:-23.1"><span class="drift"><img src="butterfly.png" alt=""></span></span>
+          </div>
+
+          <div class="gust"><i style="--g:0;top:27%"></i><i style="--g:1;top:42%"></i><i style="--g:2;top:57%"></i><i style="--g:3;top:71%"></i></div>
+        </div>
       </div>
 
+      <!-- Member 4: Station wrap for status badges -->
       <div id="stations">
         <div class="station-wrap">
           <button id="station-flowerMatch" class="btn station">Flower Match</button>
@@ -132,67 +141,6 @@
 
     <!-- Screen 6: Completion -->
     <section id="screen-complete" class="screen" hidden>
-      <div id="celebration-scene" aria-hidden="true">
-<div class="garden-stage">
-  <img class="garden-backdrop" src="backdrop.jpg" alt="">
-  <div class="garden-region is-colourful is-new">
-        <span class="garden-item" style="left:48.91%;top:64.70%;width:2.18%;--d:0"><img src="flower-1.png" alt=""></span>
-        <span class="garden-item" style="left:50.52%;top:64.85%;width:2.21%;--d:1"><img src="flower-2.png" alt=""></span>
-        <span class="garden-item" style="left:43.86%;top:65.51%;width:2.28%;--d:2"><img src="flower-3.png" alt=""></span>
-        <span class="garden-item" style="left:54.84%;top:65.85%;width:2.32%;--d:3"><img src="flower-4.png" alt=""></span>
-        <span class="garden-item" style="left:40.22%;top:65.85%;width:2.32%;--d:4"><img src="flower-5.png" alt=""></span>
-        <span class="garden-item" style="left:46.70%;top:66.00%;width:2.35%;--d:5"><img src="flower-6.png" alt=""></span>
-        <span class="garden-item" style="left:49.75%;top:67.33%;width:2.49%;--d:6"><img src="flower-1.png" alt=""></span>
-        <span class="garden-item" style="left:52.72%;top:67.81%;width:2.56%;--d:7"><img src="flower-2.png" alt=""></span>
-        <span class="garden-item" style="left:37.47%;top:70.14%;width:2.81%;--d:8"><img src="flower-3.png" alt=""></span>
-        <span class="garden-item" style="left:47.47%;top:70.14%;width:2.81%;--d:9"><img src="flower-4.png" alt=""></span>
-        <span class="garden-item" style="left:19.80%;top:77.57%;width:3.65%;--d:10"><img src="flower-5.png" alt=""></span>
-        <span class="garden-item" style="left:77.12%;top:78.39%;width:3.76%;--d:11"><img src="flower-6.png" alt=""></span>
-        <span class="garden-item" style="left:74.59%;top:79.23%;width:3.83%;--d:12"><img src="flower-1.png" alt=""></span>
-        <span class="garden-item" style="left:76.89%;top:80.38%;width:3.97%;--d:13"><img src="flower-2.png" alt=""></span>
-        <span class="garden-item" style="left:17.62%;top:80.89%;width:4.00%;--d:14"><img src="flower-3.png" alt=""></span>
-        <span class="garden-item" style="left:91.48%;top:81.22%;width:4.04%;--d:15"><img src="flower-4.png" alt=""></span>
-        <span class="garden-item" style="left:84.89%;top:82.53%;width:4.21%;--d:16"><img src="flower-5.png" alt=""></span>
-        <span class="garden-item" style="left:69.25%;top:82.86%;width:4.25%;--d:17"><img src="flower-6.png" alt=""></span>
-        <span class="garden-item" style="left:69.86%;top:83.01%;width:4.28%;--d:18"><img src="flower-1.png" alt=""></span>
-        <span class="garden-item" style="left:4.43%;top:84.19%;width:4.39%;--d:19"><img src="flower-2.png" alt=""></span>
-        <span class="garden-item" style="left:31.43%;top:84.19%;width:4.39%;--d:20"><img src="flower-3.png" alt=""></span>
-        <span class="garden-item" style="left:37.16%;top:84.52%;width:4.42%;--d:21"><img src="flower-4.png" alt=""></span>
-        <span class="garden-item" style="left:8.16%;top:84.52%;width:4.42%;--d:22"><img src="flower-5.png" alt=""></span>
-        <span class="garden-item" style="left:25.90%;top:84.67%;width:4.46%;--d:23"><img src="flower-6.png" alt=""></span>
-        <span class="garden-item" style="left:14.65%;top:84.67%;width:4.46%;--d:24"><img src="flower-1.png" alt=""></span>
-        <span class="garden-item" style="left:66.09%;top:85.49%;width:4.56%;--d:25"><img src="flower-2.png" alt=""></span>
-        <span class="garden-item" style="left:4.09%;top:85.67%;width:4.56%;--d:26"><img src="flower-3.png" alt=""></span>
-        <span class="garden-item" style="left:77.22%;top:85.85%;width:4.56%;--d:27"><img src="flower-4.png" alt=""></span>
-        <span class="garden-item" style="left:22.45%;top:86.00%;width:4.60%;--d:28"><img src="flower-5.png" alt=""></span>
-        <span class="garden-item" style="left:80.56%;top:86.15%;width:4.63%;--d:29"><img src="flower-6.png" alt=""></span>
-        <span class="garden-item" style="left:30.67%;top:86.49%;width:4.67%;--d:30"><img src="flower-1.png" alt=""></span>
-        <span class="garden-item" style="left:15.29%;top:86.67%;width:4.67%;--d:31"><img src="flower-2.png" alt=""></span>
-        <span class="garden-item" style="left:82.38%;top:87.15%;width:4.74%;--d:32"><img src="flower-3.png" alt=""></span>
-        <span class="garden-item" style="left:28.88%;top:87.33%;width:4.74%;--d:33"><img src="flower-4.png" alt=""></span>
-        <span class="garden-item" style="left:81.49%;top:87.48%;width:4.77%;--d:34"><img src="flower-5.png" alt=""></span>
-        <span class="garden-item" style="left:9.69%;top:88.66%;width:4.88%;--d:35"><img src="flower-6.png" alt=""></span>
-        <span class="garden-item" style="left:71.90%;top:89.14%;width:4.95%;--d:36"><img src="flower-1.png" alt=""></span>
-        <span class="garden-item" style="left:78.96%;top:90.47%;width:5.09%;--d:37"><img src="flower-2.png" alt=""></span>
-  </div>
-  <div class="garden-region is-colourful is-new">
-        <span class="garden-item fly" style="left:32.96%;top:48.87%;width:6.58%;--d:0;--dx:-56.2;--dy:-7.5"><span class="drift"><img src="bee.png" alt=""></span></span>
-        <span class="garden-item fly" style="left:62.15%;top:42.71%;width:5.70%;--d:3;--dx:55.0;--dy:-10.6"><span class="drift"><img src="bee.png" alt=""></span></span>
-        <span class="garden-item fly" style="left:23.15%;top:69.67%;width:7.46%;--d:6;--dx:-46.9;--dy:-13.8"><span class="drift"><img src="bee.png" alt=""></span></span>
-        <span class="garden-item fly" style="left:55.68%;top:59.90%;width:6.14%;--d:9;--dx:61.2;--dy:-16.9"><span class="drift"><img src="bee.png" alt=""></span></span>
-        <span class="garden-item fly" style="left:82.96%;top:63.16%;width:6.58%;--d:12;--dx:33.8;--dy:-20.0"><span class="drift"><img src="bee.png" alt=""></span></span>
-  </div>
-  <div class="garden-region is-colourful is-new">
-        <span class="garden-item fly" style="left:37.96%;top:22.08%;width:6.58%;--d:0;--dx:-61.2;--dy:-7.5"><span class="drift"><img src="butterfly.png" alt=""></span></span>
-        <span class="garden-item fly" style="left:53.62%;top:17.67%;width:5.26%;--d:3;--dx:63.8;--dy:-10.6"><span class="drift"><img src="butterfly.png" alt=""></span></span>
-        <span class="garden-item fly" style="left:66.49%;top:32.49%;width:7.02%;--d:6;--dx:50.0;--dy:-13.8"><span class="drift"><img src="butterfly.png" alt=""></span></span>
-        <span class="garden-item fly" style="left:34.65%;top:42.35%;width:5.70%;--d:9;--dx:-57.5;--dy:-16.9"><span class="drift"><img src="butterfly.png" alt=""></span></span>
-        <span class="garden-item fly" style="left:9.43%;top:49.18%;width:6.14%;--d:12;--dx:-32.5;--dy:-20.0"><span class="drift"><img src="butterfly.png" alt=""></span></span>
-        <span class="garden-item fly" style="left:57.59%;top:50.12%;width:4.83%;--d:15;--dx:60.0;--dy:-23.1"><span class="drift"><img src="butterfly.png" alt=""></span></span>
-  </div>
-  <div class="gust"><i style="--g:0;top:27%"></i><i style="--g:1;top:42%"></i><i style="--g:2;top:57%"></i><i style="--g:3;top:71%"></i></div>
-</div>
-      </div>
       <h2>The garden is full of colour!</h2>
       <p>You helped bring the garden back to life. Well done!</p>
       <button id="play-again-btn" class="btn">Play again</button>

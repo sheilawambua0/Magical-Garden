@@ -1,34 +1,110 @@
-/* ============================================================
-   MEMBER 4 — Garden visual only (no page background, no panels, no cards)
-   ============================================================ */
+/* ===== 1. DESIGN TOKENS & GLOBAL (From Member 1) ===== */
+:root {
+  --bg: #f4f1ea;
+  --surface: #ffffff;
+  --text: #2b2b2b;
+  --primary: #2e7d32;
+  --primary-dark: #1b5e20;
+  --accent: #f9a825;
+  --success-bg: #e3f2e1;
+  --border: #6b7f6b;
+  --radius: 14px;
+  --font: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+}
+
 [hidden] { display: none !important; }
 
-#garden-scene,
-#celebration-scene { width: 100%; max-width: 720px; margin: 0.5rem auto; }
-
-.garden-stage {
-  position: relative;
-  aspect-ratio: 800 / 560;
-  overflow: hidden;
-  border-radius: 16px;
-  container-type: inline-size;        /* lets the run-off be sized in "cqw" units */
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 1.15rem;
+  line-height: 1.5;
 }
+
+#app-header {
+  background: var(--primary);
+  color: #ffffff;
+  padding: 12px 20px;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+#app {
+  max-width: 760px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+
+.screen {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+h1, h2, h3 { margin-top: 0; }
+
+.btn {
+  min-width: 44px;
+  min-height: 48px;
+  padding: 10px 22px;
+  font-family: inherit;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ffffff;
+  background: var(--primary);
+  border: 3px solid var(--primary-dark);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.btn:hover { background: var(--primary-dark); }
+.btn:focus-visible { outline: 4px solid var(--accent); outline-offset: 3px; }
+.back-btn { margin-bottom: 12px; }
+
+#stations { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-top: 16px; }
+.station { min-width: 180px; min-height: 64px; }
+
+.instruction { font-size: 1.2rem; }
+.feedback { min-height: 2em; font-size: 1.2rem; font-weight: bold; color: var(--primary-dark); }
+
+/* ===== 2. FLOWER MATCH (From Member 1) ===== */
+#flower-cards, #flower-targets { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-bottom: 20px; }
+.flower-btn { display: flex; flex-direction: column; align-items: center; min-width: 120px; min-height: 110px; color: var(--text); background: #fffdf5; border: 3px solid var(--border); }
+.flower-btn:hover { background: #fff3c4; }
+.flower-symbol { font-size: 2.6rem; line-height: 1.2; }
+.flower-btn.selected { border: 5px dashed var(--primary-dark); background: #fff3c4; transform: scale(1.06); }
+.flower-btn.matched:disabled { color: var(--text); background: var(--success-bg); border: 3px solid var(--primary); cursor: default; }
+
+/* ===== 3. HELP THE BEE (From Member 2) ===== */
+#bee-character { display: flex; flex-direction: column; align-items: center; margin: 8px auto 24px; }
+.bee-icon { font-size: 3.5rem; line-height: 1.1; transition: transform 0.8s ease-in-out; }
+.bee-bubble { padding: 6px 14px; font-weight: bold; background: #fffdf5; border: 3px solid var(--border); border-radius: var(--radius); }
+#bee-plants { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+.bee-plant { display: flex; flex-direction: column; align-items: center; min-width: 140px; min-height: 120px; color: var(--text); background: #fffdf5; border: 3px solid var(--border); }
+.bee-plant:hover { background: #fff3c4; }
+.bee-plant-symbol { font-size: 3rem; line-height: 1.2; }
+.bee-plant.tried { border-style: dotted; }
+.bee-plant.tried .bee-plant-label::after { content: ' ?'; }
+.bee-plant.correct:disabled { color: var(--text); background: var(--success-bg); border: 5px solid var(--primary); cursor: default; }
+
+/* ===== 4. MEMBER 4: GARDEN VISUALS & STATUS ===== */
+#garden-scene, #celebration-scene { width: 100%; max-width: 720px; margin: 0.5rem auto; }
+.garden-stage { position: relative; aspect-ratio: 800 / 560; overflow: hidden; border-radius: 16px; container-type: inline-size; }
 .garden-stage > .garden-backdrop { width: 100%; height: 100%; display: block; }
 .garden-region { position: absolute; inset: 0; pointer-events: none; }
 .garden-item { position: absolute; display: block; opacity: 0; transform-origin: 50% 100%; }
 .garden-item img { display: block; width: 100%; height: auto; }
 .garden-item .drift { display: block; }
 
-/* Colour returns to the garden step by step (visible system status) */
 .garden-backdrop { transition: filter 0.8s ease; }
 #garden-scene[data-progress="0"] .garden-backdrop { filter: saturate(0.5) brightness(1.04); }
 #garden-scene[data-progress="1"] .garden-backdrop { filter: saturate(0.7) brightness(1.03); }
 #garden-scene[data-progress="2"] .garden-backdrop { filter: saturate(0.85); }
-
-/* Flowers, bees and butterflies stay hidden until their task is complete */
 .garden-region.is-colourful .garden-item { opacity: 1; }
 
-/* Pop in the first time they appear (is-new), one after another */
 .garden-region.is-new .garden-item {
   animation: gardenPop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
   animation-delay: calc(var(--d) * 40ms);
@@ -37,15 +113,12 @@
   0%   { opacity: 0; transform: translateY(8px) scale(0.3); }
   100% { opacity: 1; transform: none; }
 }
-
-/* Bees and butterflies drift gently once they are in the garden */
 .garden-region.is-colourful .drift { animation: gardenDrift 4s ease-in-out infinite alternate; }
 @keyframes gardenDrift {
   from { transform: translate(-4px, 3px); }
   to   { transform: translate(5px, -5px); }
 }
 
-/* ---- Story: everyone is here (intro) -> gust of wind (leaving) -> garden is empty ---- */
 #garden-scene[data-phase="intro"] .garden-item,
 #garden-scene[data-phase="leaving"] .garden-item { opacity: 1; }
 #garden-scene[data-phase="intro"] .garden-backdrop { filter: none; }
@@ -54,16 +127,8 @@
   transition: filter 1.6s ease 0.5s;
 }
 #garden-scene[data-phase="intro"] .drift { animation: gardenDrift 4s ease-in-out infinite alternate; }
-
-/* Flowers tuck into the ground; bees and butterflies fly off the edges */
-#garden-scene[data-phase="leaving"] .garden-item {
-  animation: gardenTuck 0.7s ease-in both;
-  animation-delay: calc(0.4s + var(--d) * 22ms);
-}
-#garden-scene[data-phase="leaving"] .garden-item.fly {
-  animation: gardenRunOff 1.8s ease-in both;
-  animation-delay: calc(0.3s + var(--d) * 40ms);
-}
+#garden-scene[data-phase="leaving"] .garden-item { animation: gardenTuck 0.7s ease-in both; animation-delay: calc(0.4s + var(--d) * 22ms); }
+#garden-scene[data-phase="leaving"] .garden-item.fly { animation: gardenRunOff 1.8s ease-in both; animation-delay: calc(0.3s + var(--d) * 40ms); }
 @keyframes gardenTuck {
   0%   { opacity: 1; transform: none; }
   30%  { transform: translateY(-6px) scale(1.1); }
@@ -75,124 +140,33 @@
   100% { opacity: 0; transform: translate(calc(var(--dx, -90) * 1cqw), calc(var(--dy, -10) * 1cqw)) scale(0.6); }
 }
 
-/* Gust of wind: a few white streaks sweeping across */
 .gust { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-.gust i {
-  position: absolute; left: -40%; width: 35%; height: 5px;
-  border-radius: 5px; background: rgba(255, 255, 255, 0.9); opacity: 0;
-}
-#garden-scene[data-phase="leaving"] .gust i {
-  animation: gardenGustBar 1.5s ease-in-out both;
-  animation-delay: calc(var(--g) * 120ms);
-}
+.gust i { position: absolute; left: -40%; width: 35%; height: 5px; border-radius: 5px; background: rgba(255, 255, 255, 0.9); opacity: 0; }
+#garden-scene[data-phase="leaving"] .gust i { animation: gardenGustBar 1.5s ease-in-out both; animation-delay: calc(var(--g) * 120ms); }
 @keyframes gardenGustBar {
   0%   { opacity: 0; transform: translateX(0); }
   20%  { opacity: 0.9; }
   100% { opacity: 0; transform: translateX(450%); }
 }
 
-/* Story line under the progress text */
-.garden-story {
-  min-height: 1.6em;
-  margin: 0.25rem 0 0.5rem;
-  text-align: center;
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: #397545;
-}
+.garden-story { min-height: 1.6em; margin: 0.25rem 0 0.5rem; text-align: center; font-size: 1.15rem; font-weight: 700; color: var(--primary); }
 
-/* Hub buttons in a row */
-#stations { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin-top: 1rem; }
+.station-wrap { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; }
+.station-status { font-size: 0.85rem; font-weight: 600; color: var(--border); padding: 2px 10px; border: 2px solid var(--border); border-radius: 999px; background: #fffdf5; }
+.station-status.is-complete { color: var(--primary); border-color: var(--primary); background: var(--success-bg); }
 
-/* Completion: Play again fades in after the garden has filled up */
-#screen-complete { text-align: center; }
 #screen-complete #play-again-btn { animation: gardenFade 0.6s ease 1.4s both; }
 @keyframes gardenFade {
   from { opacity: 0; transform: translateY(6px); }
   to   { opacity: 1; transform: none; }
 }
 
-/* Reduced motion: no animation, everything just appears */
-@media (prefers-reduced-motion: reduce) {
-  .garden-backdrop { transition: none; }
-  .garden-item, .garden-region .garden-item, .drift, .gust i,
-  #screen-complete #play-again-btn { animation: none !important; transition: none !important; }
-}
-
-/* ===== Help the Bee (Member 2) ===== */
-/* var(--x, fallback) so this works before/after the shared tokens are merged */
-#bee-character {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 8px auto 24px;
-}
-.bee-icon {
-  font-size: 3.5rem;
-  line-height: 1.1;
-  transition: transform 0.8s ease-in-out;
-}
-.bee-bubble {
-  padding: 6px 14px;
-  font-weight: bold;
-  background: #fffdf5;
-  border: 3px solid var(--border, #6b7f6b);
-  border-radius: var(--radius, 14px);
-}
-
-#bee-plants {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  justify-content: center;
-}
-.bee-plant {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 140px;
-  min-height: 120px;
-  color: var(--text, #2b2b2b);
-  background: #fffdf5;
-  border: 3px solid var(--border, #6b7f6b);
-}
-.bee-plant:hover { background: #fff3c4; }
-.bee-plant-symbol { font-size: 3rem; line-height: 1.2; }
-
-/* Tried (wrong): dotted border + ? cue, not colour alone. Still clickable. */
-.bee-plant.tried { border-style: dotted; }
-.bee-plant.tried .bee-plant-label::after { content: ' ?'; }
-
-/* Correct: solid thick border + check mark added to the label */
-.bee-plant.correct:disabled {
-  color: var(--text, #2b2b2b);
-  background: var(--success-bg, #e3f2e1);
-  border: 5px solid var(--primary, #2e7d32);
-  cursor: default;
-}
-
+/* ===== 5. SMALL SCREENS & REDUCED MOTION ===== */
 @media (max-width: 600px) {
+  .screen { padding: 16px; }
+  .station { width: 100%; }
   .bee-plant { width: 100%; }
 }
-
-/* ===== Station status badges (feed the .station-status lookups in JS) ===== */
-.station-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.35rem;
-}
-.station-status {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #6b7f6b;
-  padding: 2px 10px;
-  border: 2px solid #6b7f6b;
-  border-radius: 999px;
-  background: #fffdf5;
-}
-.station-status.is-complete {
-  color: #2e7d32;
-  border-color: #2e7d32;
-  background: #e3f2e1;
+@media (prefers-reduced-motion: reduce) {
+  .garden-backdrop, .garden-item, .garden-region .garden-item, .drift, .gust i, #screen-complete #play-again-btn { animation: none !important; transition: none !important; }
 }
