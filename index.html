@@ -21,11 +21,14 @@
 
     <!-- Screen 2: Garden hub -->
     <section id="screen-garden" class="screen" hidden>
-      <h2>The Garden</h2>
-      <p id="progress-text">0 of 3 garden tasks complete</p>
-      
-      <!-- MEMBER 4: The Garden Story & Visuals -->
-      <p id="garden-story" class="garden-story" role="status" aria-live="polite"></p>
+      <!-- MEMBER 4: HUD (title, progress, story) floats over the garden -->
+      <div class="garden-hud">
+        <h2>The Garden</h2>
+        <p id="progress-text">0 of 3 garden tasks complete</p>
+        <p id="garden-story" class="garden-story" role="status" aria-live="polite"></p>
+      </div>
+
+      <!-- MEMBER 4: The Garden Visuals -->
       <div id="garden-scene" aria-hidden="true" data-progress="0" data-phase="empty">
         <div class="garden-stage">
           <img class="garden-backdrop" src="backdrop.jpg" alt="">
